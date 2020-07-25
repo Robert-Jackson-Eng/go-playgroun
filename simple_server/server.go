@@ -6,18 +6,29 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
 )
 
 func main() {
 	//NOTE: Server must be shutdown manually
-	// host port number
-	const address string = ":8080"
+	// Host port number, passed in through command line, otherwise
+	// defaults to 8080
+	var address string
+
+	if len(os.Args) < 2 {
+		address = "8080"
+	} else {
+		address = os.Args[1]
+	}
 
 	// net.Listen return a Listener interface, and an error
-	listener, err := net.Listen("tcp", address)
+	listener, err := net.Listen("tcp", ":" + address)
 	if err != nil {
 		log.Panic(err)
 	}
+
+	fmt.Println("Running server. Listening at port " + address + "...")
+
 
 	//defer the closing of connection until main() completes
 	defer listener.Close()
