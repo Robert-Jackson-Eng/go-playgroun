@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	//Parese CSVinto GoLearn Instances
+	//Parse CSV into GoLearn Instances (data handlers)
 	rawData, err := base.ParseCSVToInstances("datasets/exams.csv", true)
 	if err != nil {
 		panic(err)
