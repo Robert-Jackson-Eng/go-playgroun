@@ -1,2 +1,2 @@
-# Golang Projects
-Golang_Projects
+# Go Projects
+Go_Projects
