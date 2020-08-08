@@ -29,8 +29,8 @@ func (q *Queue) isEmpty() bool {
 	return false
 }
 
-func isTarget(s string) bool {
-	if s == "thom" {
+func isTarget(currentNode string, targetNode string) bool {
+	if currentNode == targetNode {
 		return true
 	}
 	return false
@@ -47,11 +47,11 @@ func contains(s []string, e string) bool {
 }
 
 
-func breadthFirstSearch(graph map[string][]string, startNode []string) (bool, string) {
+func breadthFirstSearch(graph map[string][]string, startNode string, targetNode string) (bool, string) {
 	var queue *Queue = new(Queue)
 	var searched []string
 
-	queue.enqueue(startNode)
+	queue.enqueue(graph[startNode])
 
 	for {
 		if queue.isEmpty() {
@@ -62,7 +62,7 @@ func breadthFirstSearch(graph map[string][]string, startNode []string) (bool, st
 		if contains(searched, node) {
 			continue
 		}
-		if isTarget(node) {
+		if isTarget(node, targetNode) {
 			fmt.Println("Tagrget node in graph --> ", node)
 			return true, fmt.Sprintf("%v", node)
 			break
@@ -84,12 +84,14 @@ func main() {
 	graph["you"] = []string{"alice", "bob", "claire"}
 	graph["bob"] = []string{"anuj", "peggy"}
 	graph["alice"] = []string{"peggy"}
-	graph["claire"] = []string{"thom", "jonny"}
+	graph["claire"] = []string{"thomas", "jonny"}
 	graph["anuj"] = []string{}
 	graph["peggy"] = []string{}
-	graph["thom"] = []string{}
+	graph["thomas"] = []string{}
 	graph["jonny"] = []string{}
 
-	fmt.Println(breadthFirstSearch(graph, graph["you"]))
+	found, returnNode := breadthFirstSearch(graph, "you", "taylor")
+	fmt.Println("Found: ", found)
+	fmt.Println("Return Node: ", returnNode)
 
 }
