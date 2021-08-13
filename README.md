@@ -1,2 +1,2 @@
-# Go Projects
-Go_Projects
+# Go Playground
+
