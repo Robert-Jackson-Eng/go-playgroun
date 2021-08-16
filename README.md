@@ -1,2 +1,2 @@
-# Go Playground
+# Go Examples
 
